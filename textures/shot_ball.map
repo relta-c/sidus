@@ -1,0 +1,11 @@
+type=sprite_map version=1
+sprites_count=9 default_width=50 default_height=50
+name=shot_ball_0_red x=0 y=0
+name=shot_ball_1_orange x=0 y=50
+name=shot_ball_2_yellow x=0 y=100
+name=shot_ball_3_green x=0 y=150
+name=shot_ball_4_sky x=0 y=200
+name=shot_ball_5_blue x=0 y=250
+name=shot_ball_6_violet x=0 y=300
+name=shot_ball_7_pink x=0 y=350
+name=shot_ball_8_grey x=0 y=400

@@ -1,0 +1,6 @@
+type=sprite_map version=1
+sprites_count=4 default_width=50 default_height=100
+name=effect_shot_chara_a_0 x=0 y=0
+name=effect_shot_chara_a_1 x=0 y=100
+name=effect_shot_chara_a_2 x=0 Y=200
+name=effect_shot_chara_a_3 x=0 y=300

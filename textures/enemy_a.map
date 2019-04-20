@@ -1,0 +1,8 @@
+type=sprite_map version=1
+sprites_count=6 default_width=500 default_height=500
+name=enemy_a_0 x=0 y=0
+name=enemy_a_1 x=500 y=0
+name=enemy_a_2 x=0 y=500
+name=enemy_a_3 x=500 y=500
+name=enemy_a_4 x=0 y=1000
+name=enemy_a_5 x=500 y=1000

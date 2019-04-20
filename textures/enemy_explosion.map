@@ -1,0 +1,11 @@
+type=sprite_map version=1
+sprites_count=9 default_width=500 default_height=500
+name=enemy_explosion_0 x=0 y=0
+name=enemy_explosion_1 x=500 y=0
+name=enemy_explosion_2 x=1000 y=0
+name=enemy_explosion_3 x=1500 y=0
+name=enemy_explosion_4 x=2000 y=0
+name=enemy_explosion_5 x=2500 y=0
+name=enemy_explosion_6 x=3000 y=0
+name=enemy_explosion_7 x=3500 y=0
+name=enemy_explosion_8 x=4000 y=0

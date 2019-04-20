@@ -1,0 +1,5 @@
+type=sprite_map version=1
+sprites_count=3 default_width=500 default_height=500
+name=chara_a_0 x=0 y=0
+name=chara_a_1 x=500 y=0
+name=chara_a_2 x=1000 y=0
