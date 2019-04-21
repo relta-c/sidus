@@ -24,6 +24,7 @@ public class BombA extends Bomb {
     private static final float BLINK_TRANSPARENCY = 20.0f;
     private static final float DECAY_SPEED = 300.0f;
     private static final float ALIVE_TIME_MAX = 4.0f;
+    public static final float DAMAGE = 3000.0f;
     private final MutableVector3<Float> color;
     private final CollisionSpace collisionSpace;
     private final Player player;
@@ -42,13 +43,13 @@ public class BombA extends Bomb {
     @Override
     protected void startLoop() {
         if (armed) {
-            collisionSpace.checkDamageAgainstEnemies(this, getDamage());
+            collisionSpace.checkBombAgainstEnemies(this, getDamage());
         }
     }
 
     @Override
     float getDamage() {
-        return 1.0f;
+        return DAMAGE;
     }
 
     @Override
@@ -90,6 +91,7 @@ public class BombA extends Bomb {
             setSize(getSize().getX() + (SECOND_INFALTION_SPEED * getDelta()), getSize().getY() + (SECOND_INFALTION_SPEED * getDelta()));
             setTransparency(getTransparency() - DECAY_SPEED * getDelta());
         } else if (aliveTime < ALIVE_TIME_MAX) {
+            collisionSpace.clearEnemyShots();
             setTransparency(getTransparency() - DECAY_SPEED * getDelta());
         } else {
             terminate();

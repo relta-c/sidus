@@ -27,10 +27,7 @@ public class GroupA04 extends Group {
     @Override
     public void loop() {
         final float base = 0.0f;
-        final float dif = 0.0f;
         spawnAt(base, enemy00);
-        spawnAt(base + (dif * 1), enemy01);
-        spawnAt(base + (dif * 2), enemy02);
     }
 
     @Override

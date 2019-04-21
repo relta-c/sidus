@@ -1,31 +1,29 @@
 package org.csgroup.sidus.script.enemy.shot;
 
 import net.chifumi.stellar.math.Vector2;
-import org.csgroup.sidus.config.Setting;
-import org.csgroup.sidus.script.common.AutoCleanActor;
-import org.csgroup.sidus.script.common.CollisionSpace;
 import org.csgroup.sidus.script.common.TextureSet;
 import org.csgroup.sidus.script.enemy.Enemy;
 import org.csgroup.sidus.util.Angle;
 import org.csgroup.sidus.util.ShotColor;
 import org.jetbrains.annotations.NotNull;
 
-public class ShotBall extends AutoCleanActor {
-    private static final float SPEED = 300.0f;
+public class ShotBall extends EnemyShot {
+    private static final float SPEED = 120.0f;
     private static final int SIZE = 15;
     private final float direction;
     private final Vector2<Float> startPosition;
     private final int drawLayer;
-    private final CollisionSpace collisionSpace;
     private final TextureSet textureSet;
     private final int shotColor;
+    private float configSpeed;
+
+    private float time;
 
     public ShotBall(@NotNull final Enemy parent, @NotNull final ShotColor shotColor) {
         super(parent);
         direction = Angle.BACKWARD.getAngle();
         startPosition = parent.getPosition();
         drawLayer = parent.getDrawLayer() - 1;
-        collisionSpace = parent.getCollisionSpace();
         textureSet = parent.getTextureSet();
         this.shotColor = shotColor.ordinal();
     }
@@ -35,7 +33,15 @@ public class ShotBall extends AutoCleanActor {
         this.direction = direction;
         startPosition = parent.getPosition();
         drawLayer = parent.getDrawLayer() - 1;
-        collisionSpace = parent.getCollisionSpace();
+        textureSet = parent.getTextureSet();
+        this.shotColor = shotColor.ordinal();
+    }
+
+    public ShotBall(@NotNull final Enemy parent, final float direction, final Vector2<Float> startPosition, @NotNull final ShotColor shotColor) {
+        super(parent);
+        this.direction = direction;
+        this.startPosition = startPosition;
+        drawLayer = parent.getDrawLayer() - 1;
         textureSet = parent.getTextureSet();
         this.shotColor = shotColor.ordinal();
     }
@@ -54,11 +60,11 @@ public class ShotBall extends AutoCleanActor {
 
     @Override
     public void loop() {
-        checkBoundary();
-        moveToAngle(direction, SPEED * getDelta());
-        if (collisionSpace.isCollideWithPlayer(this)) {
-            collisionSpace.killPlayer();
-        }
+        time += getDelta();
+        final float setSpeed = configSpeed == 0 ? SPEED : configSpeed;
+        final float speedMod = time > 1 ? 1 : time;
+        final float speed = setSpeed * (1 + (1 - (speedMod)));
+        moveToAngle(direction, speed * getDelta());
     }
 
     @Override
@@ -66,16 +72,11 @@ public class ShotBall extends AutoCleanActor {
 
     }
 
-    private void checkBoundary() {
-        final Vector2<Float> position = getOrigin();
-        if (position.getX() < (Setting.gameOriginX - getSize().getX())) {
-            terminate();
-        } else if (position.getX() > (Setting.gameMaxX + getSize().getX())) {
-            terminate();
-        } else if (position.getY() < (Setting.gameOriginY - getSize().getY())) {
-            terminate();
-        } else if (position.getY() > (Setting.gameMaxY + getSize().getY())) {
-            terminate();
-        }
+    public float getConfigSpeed() {
+        return configSpeed;
+    }
+
+    public void setConfigSpeed(final float configSpeed) {
+        this.configSpeed = configSpeed;
     }
 }

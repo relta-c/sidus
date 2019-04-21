@@ -21,27 +21,31 @@ public class TextureSet extends SubTask {
 
     @Override
     public void init() {
+        addTexture("red", "textures/color_red.png");
+        addTexture("grey", "textures/color_grey.png");
+        addTexture("light", "textures/color_light.png");
+        addTexture("black", "textures/color_black.png");
         addTexture("bg_main", "textures/bg_main.png");
         addTexture("logo", "textures/logo.png");
         addTexture("menu_start", "textures/menu_start.png");
         addTexture("menu_quit", "textures/menu_quit.png");
-        addTexture("ui", "textures/ui.png");
-        addTexture("ui", "textures/ui.png");
-        addTexture("ui", "textures/ui.png");
         addTexture("bg_stage_a", "textures/bg_stage_a.png");
         addTexture("wave", "textures/wave.png");
         addTexture("player_hitbox", "textures/hitbox.png");
         addTexture("shot_chara_a", "textures/shot_chara_a.png");
         addTexture("bomb_a_back", "textures/bomb_a_back.png");
         addTexture("bomb_a_front", "textures/bomb_a_front.png");
-        addTexture("shot_chara_a", "textures/shot_chara_a.png");
+        addTexture("ui", "textures/ui.png");
         addTexture("ui_life", "textures/ui_life.png");
         addTexture("ui_no_life", "textures/ui_no_life.png");
         addTexture("ui_bomb", "textures/ui_bomb.png");
         addTexture("ui_no_bomb", "textures/ui_no_bomb.png");
+        addTexture("ui_game_over", "textures/ui_game_over.png");
+        addTexture("magic_circle", "textures/effect_magic_circle.png");
         addSpriteMap("chara_a", "textures/chara_a.png", "textures/chara_a.map");
         addSpriteMap("effect_shot_chara_a", "textures/effect_shot_chara_a.png", "textures/effect_shot_chara_a.map");
         addSpriteMap("enemy_a", "textures/enemy_a.png", "textures/enemy_a.map");
+        addSpriteMap("boss", "textures/boss.png", "textures/boss.map");
         addSpriteMap("shot_ball","textures/shot_ball.png","textures/shot_ball.map");
         addSpriteMap("enemy_explosion", "textures/enemy_explosion.png", "textures/enemy_explosion.map");
     }

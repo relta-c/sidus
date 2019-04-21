@@ -14,7 +14,7 @@ import org.csgroup.sidus.script.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class Player extends Actor {
-    public static final float INVINCIBLE_TIMEOUT = 3.0f;
+    public static final float INVINCIBLE_TIMEOUT = 5.0f;
     private static final float BLINK_TRANSPARENCY = 20.0f;
     private static final float BLINK_SPEED = 0.15f;
     private static final float SPAWN_DURATION = 1.0f;
@@ -231,6 +231,12 @@ public abstract class Player extends Actor {
             setInvincible(true);
             invincibleTimeout = INVINCIBLE_TIMEOUT;
             spawning = true;
+            gameState.setBomb(3);
+
+            if (gameState.getPlayerLife() == 0) {
+                stage.setPause(true);
+                gameState.setGameOver(true);
+            }
         }
     }
 

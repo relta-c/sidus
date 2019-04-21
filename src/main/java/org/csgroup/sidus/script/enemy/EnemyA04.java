@@ -2,7 +2,7 @@ package org.csgroup.sidus.script.enemy;
 
 import net.chifumi.stellar.math.ImmutableVector2;
 import net.chifumi.stellar.math.Vector2;
-import org.csgroup.sidus.script.enemy.shot.ShotBall;
+import org.csgroup.sidus.script.enemy.shot.ShotBallCurve;
 import org.csgroup.sidus.script.stage.Stage;
 import org.csgroup.sidus.util.ShotColor;
 import org.jetbrains.annotations.NotNull;
@@ -12,8 +12,8 @@ public class EnemyA04 extends Enemy {
     private static final int SCORE = 750;
     private static final float SPEED = 100.0f;
     private static final int SIZE = 75;
-    private static final float SHOT_COOL_DOWN = 0.8f;
-    private static final float MAX_HEALTH = 500;
+    private static final float SHOT_COOL_DOWN = 0.3f;
+    private static final float MAX_HEALTH = 1000;
     private static final float CIRCLE = 360.0f;
     private EnemyExplosion explosion;
     private final Vector2<Float> position;
@@ -53,11 +53,11 @@ public class EnemyA04 extends Enemy {
     @Override
     public void loop() {
         if (isAlive()) {
-            moveToAngle(direction, speed * getDelta());
-            if (shotTime >= SHOT_COOL_DOWN) {
-                fire();
-                shotTime = 0;
-            }
+                moveToAngle(direction, speed * getDelta());
+                if (shotTime >= SHOT_COOL_DOWN && moveTime >= 2 && moveTime <= 6) {
+                    fire();
+                    shotTime = 0;
+                }
             shotTime += getDelta();
         } else {
             if (!explosion.isAnimating()) {
@@ -78,7 +78,7 @@ public class EnemyA04 extends Enemy {
     private void fire() {
         final int fireCount = 24;
         for (int i = 0; i < fireCount; i++) {
-            addSubTask(new ShotBall(this, (CIRCLE / fireCount) * i, ShotColor.BLUE));
+            addSubTask(new ShotBallCurve(this, (CIRCLE / fireCount) * i, ShotColor.BLUE, 12));
         }
     }
 

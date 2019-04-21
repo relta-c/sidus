@@ -1,0 +1,8 @@
+type=sprite_map version=1
+sprites_count=6 default_width=500 default_height=500
+name=boss_0 x=0 y=0
+name=boss_1 x=500 y=0
+name=boss_2 x=0 y=500
+name=boss_3 x=500 y=500
+name=boss_4 x=0 y=1000
+name=boss_5 x=500 y=1000

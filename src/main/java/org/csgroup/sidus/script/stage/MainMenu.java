@@ -19,8 +19,8 @@ import java.util.List;
 public class MainMenu extends PrimaryTask {
     private static final Vector3<Float> INACTIVE_MENU_COLOR = new ImmutableVector3<>(255.0f, 255.0f, 255.0f);
     private static final Vector3<Float> ACTIVE_MENU_COLOR = new ImmutableVector3<>(255.0f, 100.0f, 150.0f);
-    private static final Vector2<Float> MENU_SIZE = new ImmutableVector2<>(250.0f, 90.0f);
-    private static final Vector2<Float> MENU_ORIGIN = new ImmutableVector2<>(50.0f, 650.0f);
+    private static final Vector2<Float> MENU_SIZE = new ImmutableVector2<>(400.0f, 200.0f);
+    private static final Vector2<Float> MENU_ORIGIN = new ImmutableVector2<>(370.0f, 650.0f);
     private static final float LOGO_Y = 50;
     private static final float KEY_COOL_DOWN = 0.1f;
 
@@ -76,7 +76,7 @@ public class MainMenu extends PrimaryTask {
         startMenu.setSize(MENU_SIZE);
         startMenu.setOrigin(MENU_ORIGIN);
         quitMenu.setSize(MENU_SIZE);
-        quitMenu.setOrigin(startMenu.getOrigin().getX(), startMenu.getOrigin().getY() + quitMenu.getSize().getY());
+        quitMenu.setOrigin(startMenu.getOrigin().getX(), startMenu.getOrigin().getY() + quitMenu.getSize().getY() / 2);
     }
 
     private void drawAll() {

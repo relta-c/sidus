@@ -13,6 +13,7 @@ import net.chifumi.stellar.texture.TextureLoader
 import org.csgroup.sidus.entity.AnimateEntity
 import org.csgroup.sidus.entity.Entity
 import org.csgroup.sidus.config.KeyMap
+import java.io.File
 
 abstract class BaseTask {
     private var running = false
@@ -39,7 +40,7 @@ abstract class BaseTask {
     open fun preInit() {}
 
     fun loadTexture(path: String): Texture {
-        val newTexture = TextureLoader().load(path)!!
+        val newTexture = TextureLoader().load(File(path).toPath().normalize().toString())!!
         textureList.add(newTexture)
         println("INFO : TEXTURE - Add by $this :: \"$path\" -> [${newTexture.hashCode()}]")
         return newTexture
@@ -50,8 +51,6 @@ abstract class BaseTask {
     }
 
     fun addEntity(texture: Texture) = Entity(texture)
-
-    fun addEntity(spriteMap: SpriteMap, name: CharSequence) = Entity(spriteMap, name)
 
     fun addAnimateEntity(spriteMap: SpriteMap, name: CharSequence) = AnimateEntity(spriteMap, name)
 
@@ -110,10 +109,6 @@ abstract class BaseTask {
     open fun <T : SubTask> removeAndTerminateSubTask(task: T) {
         this.subTaskList.remove(task)
         task.terminate()
-    }
-
-    fun isRunning(): Boolean {
-        return running;
     }
 
     abstract fun getDelta(): Float

@@ -12,6 +12,7 @@ public abstract class Enemy extends AutoCleanActor {
     private final CollisionSpace collisionSpace;
     private final TextureSet textureSet;
     private final GameState gameState;
+    private float maxHealth;
     private float health;
     private boolean alive;
 
@@ -25,6 +26,7 @@ public abstract class Enemy extends AutoCleanActor {
         textureSet = parent.getTextureSet();
         gameState = parent.getGameState();
         setDrawLayer(ENEMY_LAYER);
+        bombedTime = BOMB_INVINCIBLE_TIME;
     }
 
     @Override
@@ -52,6 +54,17 @@ public abstract class Enemy extends AutoCleanActor {
 
     public void setHealth(final float health) {
         this.health = health;
+        if (maxHealth < health) {
+            maxHealth = health;
+        }
+    }
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(final float maxHealth) {
+        this.maxHealth = maxHealth;
     }
 
     public void reduceHealth(final float amount) {
@@ -60,7 +73,7 @@ public abstract class Enemy extends AutoCleanActor {
 
     public void bombed(final float rawDamage) {
         if (bombedTime > BOMB_INVINCIBLE_TIME) {
-            health -= rawDamage;
+            reduceHealth(rawDamage);
             bombedTime = 0;
         }
     }

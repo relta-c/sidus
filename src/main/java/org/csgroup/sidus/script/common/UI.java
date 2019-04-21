@@ -49,6 +49,8 @@ public class UI extends SubTask {
 
     @Override
     public void init() {
+        uiBackground.setAbsoluteSize(Setting.windowWidth, Setting.gameHeight + 100);
+        uiBackground.setAbsoluteOrigin(0, 0);
         scoreText = new Text("Score : ", FONT_SIZE, cirno);
         scoreValueText = new Text("0", FONT_SIZE, cirno);
         playerText = new Text("Player : ", FONT_SIZE, cirno);

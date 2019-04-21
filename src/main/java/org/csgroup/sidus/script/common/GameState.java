@@ -11,13 +11,37 @@ public class GameState extends SubTask {
     private int bombCount;
     private float power;
     private int gaze;
+    private boolean gameOver;
+    private boolean gameWin;
 
     public GameState(@NotNull final BaseTask parent) {
         super(parent);
         score = 0;
         power = 4.0f;
-        playerLife = 1;
-        bombCount = 3;
+        playerLife = 6;
+        bombCount = 2;
+    }
+
+    public boolean isGameWin() {
+        return gameWin;
+    }
+
+    public void setGameWin(final boolean gameWin) {
+        this.gameWin = gameWin;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(final boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public void reset() {
+        score = 0;
+        playerLife = 6;
+        bombCount = 2;
     }
 
     @Override
@@ -77,6 +101,10 @@ public class GameState extends SubTask {
 
     public float getPower() {
         return power;
+    }
+
+    public void setBomb(final int bomb) {
+        bombCount = bomb;
     }
 
     public void setPower(final float power) {

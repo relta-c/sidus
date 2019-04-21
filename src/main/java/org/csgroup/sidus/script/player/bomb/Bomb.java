@@ -19,7 +19,7 @@ public abstract class Bomb extends PlayerProjectile {
     @Override
     protected void startLoop() {
         super.startLoop();
-        player.getEntities().checkDamageAgainstEnemies(this, getDamage());
+        player.getEntities().checkBombAgainstEnemies(this, getDamage());
     }
 
     public Vector2<Float> getPlayerOrigin() {

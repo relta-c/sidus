@@ -11,33 +11,53 @@ abstract class PrimaryTask(val subTaskList: MutableList<SubTask>) : BaseTask() {
     private val timer: Timer = Timer()
     private val drawList = HashMap<TexturedDrawable, Pair<Int, Boolean>>()
     private val drawSolidList = HashMap<Drawable, Pair<Int, Boolean>>()
-    private val drawTextList = HashMap<Text, Int>();
-    private var deltaTime: Float = 0.0f
+    private val drawTextList = HashMap<Text, Int>()
+    private var deltaTime: Float = 0F
 
+    var pause = false
     override fun preInit() {
         println("INFO : PRIMARY_TASK - start @ $javaClass -> subtasks :: $subTaskList")
         for (subTask in subTaskList) {
-            subTask.parent = this;
+            subTask.parent = this
+        }
+        if (!timer.isStarted) {
+            timer.start()
         }
     }
 
     override fun startLoop() {
-        if (!timer.isStarted) {
-            timer.start()
+        val d = timer.deltaTime
+
+        val addTime = if (d < 0.01F) {
+            d
+        } else {
+            0.01F
         }
-        deltaTime = timer.deltaTime
+
+        deltaTime = if (pause) {
+            0F
+        } else {
+            addTime
+        }
+
         enableMask()
+
     }
 
-    fun <T : PrimaryTask> toNewStage(task: PrimaryTask) {
-        newTask(task)
-        terminateSelfOnly()
+    fun unPause() {
+        pause = false
+        deltaTime = 0F
     }
 
     override fun endLoop() {
         drawLayered()
         disableMask()
         refresh()
+    }
+
+    fun <T : PrimaryTask> toNewStage(task: PrimaryTask) {
+        newTask(task)
+        terminateSelfOnly()
     }
 
     override fun <T : SubTask> addSubTask(task: T) {
@@ -55,9 +75,8 @@ abstract class PrimaryTask(val subTaskList: MutableList<SubTask>) : BaseTask() {
     }
 
     override fun draw(text: Text, layer: Int) {
-        this.drawTextList[text] = layer;
+        this.drawTextList[text] = layer
     }
-
 
     fun enableMask() {
         Game.renderer.enableMask(

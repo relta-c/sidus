@@ -13,7 +13,7 @@ public class PlayerA extends Player {
     private static final float PLAYER_SIZE = 125.0f;
     private static final float HITBOX_SIZE = 10.0f;
     private static final float PLAYER_SPEED = 500.0f;
-    private static final float FOCUSED_SPEED = 250.0f;
+    private static final float FOCUSED_SPEED = 100.0f;
     private static final float SIDE_PADDING = -35.0f;
     private static final float SHOT_COOL_DOWN = 0.03f;
 
@@ -49,6 +49,7 @@ public class PlayerA extends Player {
 
     @Override
     public void loop() {
+
     }
 
     @Override

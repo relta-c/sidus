@@ -4,7 +4,7 @@ import org.csgroup.sidus.script.common.Actor;
 import org.jetbrains.annotations.NotNull;
 
 public class BombAEffect extends Actor {
-    private static final float ROTATE_SPEED = 10.0f;
+    private static final float ROTATE_SPEED = 1000.0f;
     public static final int TRANSPARENCY = 70;
     private final BombA bomb;
 
@@ -26,7 +26,7 @@ public class BombAEffect extends Actor {
         setPosition(bomb.getPosition());
         setSize(bomb.getSize());
         setTransparency(bomb.getTransparency());
-        setRotation(getRotation() + ROTATE_SPEED);
+        setRotation(getRotation() + (ROTATE_SPEED * getDelta()));
     }
 
     @Override

@@ -11,8 +11,3 @@ class Launcher {
         Game.coroutineScope.launch { InitializeTask(mutableListOf<SubTask>()).start() }
     }
 }
-
-fun main() {
-    val launcher = Launcher()
-    launcher.start()
-}

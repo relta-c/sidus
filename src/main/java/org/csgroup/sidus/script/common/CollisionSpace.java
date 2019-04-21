@@ -8,8 +8,10 @@ import net.chifumi.stellar.math.Vector2;
 import org.csgroup.sidus.core.BaseTask;
 import org.csgroup.sidus.core.SubTask;
 import org.csgroup.sidus.script.enemy.Enemy;
+import org.csgroup.sidus.script.enemy.shot.EnemyShot;
 import org.csgroup.sidus.script.player.Player;
 import org.csgroup.sidus.script.player.PlayerProjectile;
+import org.csgroup.sidus.script.player.bomb.Bomb;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -18,12 +20,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CollisionSpace extends SubTask {
     private final List<Enemy> enemies;
+    private final List<EnemyShot> enemyShots;
     private final Player player;
 
     public CollisionSpace(@NotNull final BaseTask parent, final Player player) {
         super(parent);
         this.player = player;
         enemies = new CopyOnWriteArrayList<>();
+        enemyShots = new CopyOnWriteArrayList<>();
     }
 
     public static boolean isCollide(@NotNull final Actor actorA, @NotNull final Actor actorB) {
@@ -81,6 +85,16 @@ public class CollisionSpace extends SubTask {
         }
     }
 
+    public void checkBombAgainstEnemies(final Bomb shot, final float amount) {
+        final Pair<Boolean, List<Enemy>> result = checkCollideWithEnemies(shot);
+        if (result.getFirst()) {
+            for (final Enemy enemy : result.getSecond()) {
+                enemy.bombed(amount);
+            }
+            shot.hit();
+        }
+    }
+
 
     public void killPlayer() {
         player.kill();
@@ -92,5 +106,16 @@ public class CollisionSpace extends SubTask {
 
     public Vector2<Float> getPlayerOrigin() {
         return player.getOrigin();
+    }
+
+    public void addEnemyShot(final EnemyShot shot) {
+        enemyShots.add(shot);
+    }
+
+    public void clearEnemyShots() {
+        for (final EnemyShot shot : enemyShots) {
+            shot.setDisarm(true);
+            enemyShots.remove(shot);
+        }
     }
 }

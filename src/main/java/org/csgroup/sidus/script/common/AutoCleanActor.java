@@ -22,7 +22,7 @@ public abstract class AutoCleanActor extends Actor {
         checkLiveTime();
     }
 
-    private void checkLiveTime() {
+    protected void checkLiveTime() {
         liveTime += getDelta();
         if (liveTime >= deathTime) {
             terminate();
